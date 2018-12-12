@@ -1,0 +1,10 @@
+git status
+
+git add -A
+
+//FIGURE OUT HOW TO MAKE BRANCHES AND STUFFS
+git commit -m ""
+
+git push origin master
+
+git pull origin master
