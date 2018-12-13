@@ -8,3 +8,11 @@ git commit -m ""
 git push origin master
 
 git pull origin master
+
+
+//Create a branch
+git branch 'name'
+git checkout 'name'
+
+//Switch back to master
+git checkout master
