@@ -1,24 +1,18 @@
 <?php
 
-$connect = mysqli_connect("vent.cw5pxbba6uve.us-west-2.rds.amazonaws.com", "ventadmin", "Hambone1joshpane42", "OSMIR");
-$data = json_decode(file_get_contents("php://input"));
-if(count($data) > 0){
-  $sport = mysqli_real_escape_string($connect, $data->sport);
-  $query = "Select * from trainer where sport='$sport'";
-  if(mysqli_query($connect, $query))
-  {
-    echo "Worked";
-  }else{
-    echo "Did Not Work";
-  }
+$con = mysqli_connect("vent.cw5pxbba6uve.us-west-2.rds.amazonaws.com", "ventadmin", "Hambone1joshpane42", "OSMIR");
+//$data = json_decode(file_get_contents("php://input"));
+$sel = mysqli_query($con,"select * from trainer");
+$data = array();
+
+
+while ($row = mysqli_fetch_array($sel)) {
+ $data[] = array("trainerEmail"=>$row['trainerEmail'],"sport"=>$row['sport'],"trainerName"=>$row['trainerName']);
 }
+echo json_encode($data);
+?>
 
-
-
-
- ?>
-
-<!-- 
+<!--
 var express = require('express');
 var app = express();
 var fs = require("fs");

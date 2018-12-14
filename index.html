@@ -1,43 +1,37 @@
 <!doctype html>
 <html>
   <head>
+    <link rel="shortcut icon" href="">
     <meta charset="utf-8">
     <title>OSMIR</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
   </head>
-  <body >
-    <!-- <div ng-app="osmir" ng-controller="osmirController">
-      <div class="well" ng-repeat="stuff in data">
-          <h3> {{ stuff.name }} </h3>
-          <p><strong>Position: </strong>{{ stuff.position }}</p>
-          <p><strong>Injury: </strong>{{ stuff.injury }}</p>
-          <p><strong>Status: </strong>{{ stuff.status }}</p>
-      </div>
-    </div> -->
-    <div ng-app="temp" ng-controller="dbStuff">
-      <label> Sport </label>
-      <input type="text" name="sport" ng-model="sport" class="form-control"/>
-      <br />
-      <input type="submit" name="btnInsert" class="btn btn-info" ng-click="insertData()" value="Check"/>
-    </div>
-  </body>
+  <body ng-app='myapp'>
+
+ <div ng-controller="userCtrl">
+
+   <table >
+
+     <tr>
+       <th>Email</th>
+       <th>Sport</th>
+       <th>Trainer Name</th>
+     </tr>
+
+     <tr ng-repeat="user in users track by $index">
+       <td>{{user.trainerEmail}}</td>
+       <td>{{user.sport}}</td>
+       <td>{{user.trainerName}}</td>
+     </tr>
+
+   </table>
+ </div>
+
+</body>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
   <script src="app.js"></script>
   <script src="scripts/projController.js"></script>
 </html>
-
-<script>
-var app = angular.module("temp", []);
-app.controller("dbStuff", function($scope, $http){
-  $scope.insertData = function(){
-        $http.post(
-          "insert.php", {'sport':$scope.sport}
-        ).success(function(data){
-          alert(data);
-        });
-      }
-
-})

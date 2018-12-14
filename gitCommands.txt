@@ -16,3 +16,8 @@ git checkout 'name'
 
 //Switch back to master
 git checkout master
+
+//Start Web Server
+python -m SimpleHTTPServer
+  //Then go to
+  localhost:8000
