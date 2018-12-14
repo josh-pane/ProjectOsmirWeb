@@ -35,3 +35,17 @@ angular
         },
       ];
   });
+
+  
+  angular
+    .module('temp')
+    .controller('dbStuff', function($scope, $http) {
+      $scope.insertData = function(){
+        $http.post(
+          "insert.php", {'sport':$scope.sport}
+        ).success(function(data){
+          alert(data);
+        });
+      }
+
+    });
