@@ -18,6 +18,7 @@ git checkout 'name'
 git checkout master
 
 //Start Web Server
-python -m SimpleHTTPServer
+//In web (working) directory
+sudo php -S 127.0.0.1:80 -t .
   //Then go to
-  localhost:8000
+  localhost:80

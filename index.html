@@ -1,5 +1,9 @@
 <!doctype html>
 <html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+
   <head>
     <link rel="shortcut icon" href="">
     <meta charset="utf-8">
@@ -7,31 +11,24 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
   </head>
-  <body ng-app='myapp'>
+  <body >
+    hi pops
+    <div ng-app="myApp" ng-controller="customersCtrl">
+      <div ng-repeat="x in names">
+      {{ x.trainerName }}
+      </div>
+    </div>
 
- <div ng-controller="userCtrl">
+    <script>
+    var app = angular.module('myApp', []);
+    app.controller('customersCtrl', function($scope, $http) {
+        $http.get("select.php")
+        .then(function (response) {$scope.names = response.data;})
+        .catch(function (err) {$scope.names= "hi"});
 
-   <table >
-
-     <tr>
-       <th>Email</th>
-       <th>Sport</th>
-       <th>Trainer Name</th>
-     </tr>
-
-     <tr ng-repeat="user in users track by $index">
-       <td>{{user.trainerEmail}}</td>
-       <td>{{user.sport}}</td>
-       <td>{{user.trainerName}}</td>
-     </tr>
-
-   </table>
- </div>
+    });
+    </script>
 
 </body>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
-  <script src="app.js"></script>
-  <script src="scripts/projController.js"></script>
+
 </html>
