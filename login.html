@@ -1,0 +1,52 @@
+<!-- if (password_verify('rasmuslerdorf', $hash)) {
+    echo 'Password is valid!';
+} else {
+    echo 'Invalid password.';
+} -->
+
+<!doctype html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+
+  <head>
+    <link rel="shortcut icon" href="">
+    <meta charset="utf-8">
+    <title>OSMIR</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  </head>
+  <body >
+    <div ng-app="loginApp" ng-controller="loginCtrl">
+      Email: <input type="text" name="email" ng-model="email"/><br>
+      Password: <input type="password" name="pword" ng-model="password"/><br>
+      <button ng-click="submit()">Submit</button>
+      <button ng-click="back()">Back</button>
+    </div>
+
+    <script>
+    var app = angular.module('loginApp', []);
+    app.controller('loginCtrl', function($scope, $http) {
+        $scope.submit = function(){
+          dat = {
+            'email' : $scope.email,
+            'password' : $scope.password
+          };
+           $http.post('verifyLogin.php', dat)
+              .then(function(response) {
+          		console.log(response.data);
+              if(response.data == 'Y'){
+                window.location = "index.html";
+              }else{
+                window.alert("Invalid Username Or Password")
+              }
+          	});
+        }
+
+    });
+    </script>
+
+</body>
+
+</html>

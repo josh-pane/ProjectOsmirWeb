@@ -8,3 +8,17 @@ git commit -m ""
 git push origin master
 
 git pull origin master
+
+
+//Create a branch
+git branch 'name'
+git checkout 'name'
+
+//Switch back to master
+git checkout master
+
+//Start Web Server
+//In web (working) directory
+sudo php -S 127.0.0.1:80 -t .
+  //Then go to
+  localhost:80
