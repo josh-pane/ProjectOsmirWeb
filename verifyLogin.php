@@ -25,7 +25,7 @@ while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
   $hashPass = $rs['password_ID'];
 
   if (password_verify($pass, $hashPass)) {
-    $returnVal='Y';
+    $returnVal=$email;
      echo(json_encode($returnVal));
   } else {
     $returnVal='N';

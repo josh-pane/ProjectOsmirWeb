@@ -1,42 +1,22 @@
 <!doctype html>
 <html>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
-
   <head>
-    <link rel="shortcut icon" href="">
     <meta charset="utf-8">
     <title>OSMIR</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
   </head>
-  <body >
-    <div ng-app="myApp" ng-controller="customersCtrl">
-
-      <!-- how to read in a list of names -->
-      <div ng-repeat="x in names">
-      {{ x.trainerName }}
-      </div>
-       <button ng-click="newTrainer()">New Trainer</button>
-       <button ng-click="login()">Login</button>
+  <body ng-app="osmir" ng-controller="osmirController">
+    <div class="well" ng-repeat="stuff in data">
+        <h3> {{ stuff.name }} </h3>
+        <p><strong>Position: </strong>{{ stuff.position }}</p>
+        <p><strong>Injury: </strong>{{ stuff.injury }}</p>
+        <p><strong>Status: </strong>{{ stuff.status }}</p>
     </div>
-
-    <script>
-    var app = angular.module('myApp', []);
-    app.controller('customersCtrl', function($scope, $http) {
-        $http.get("select.php")
-        .then(function (response) {$scope.names = response.data;})
-        .catch(function (err) {$scope.names= "hi"});
-        $scope.newTrainer = function(){
-            window.location = "newTrainer.html";
-        }
-        $scope.login = function(){
-            window.location = "login.html";
-        }
-    });
-    </script>
-
-</body>
-
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+  <!-- <script src="app.js"></script>
+  <script src="scripts/projController.js"></script> -->
 </html>
