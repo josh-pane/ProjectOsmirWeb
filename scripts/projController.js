@@ -1,20 +1,20 @@
 var app = angular.module('osmirApp', []);
 var tempThing = '';
-app.service('infoStore', function() {
-  var userEmail = [];
+app.factory('infoStore', function() {
+  var userEmail = {
+      Value: ''
+  };
 
   return {
     setUserEmail: function(newObj) {
-        userEmail.push(newObj);
+        userEmail.Value = newObj;
     },
     getUserEmail: function(){
-        return userEmail;}
+        return userEmail.Value;}
   };
 
-});
-
-//Login Controller
-app.controller('loginCtrl', function($scope, $http, infoStore) {
+}).controller('loginCtrl', function($scope, $http, infoStore) {
+    localStorage.setItem('isLoggedIn','N');
     $scope.login = function(){
       dat = {
         'email' : $scope.email,
@@ -26,6 +26,8 @@ app.controller('loginCtrl', function($scope, $http, infoStore) {
             infoStore.setUserEmail($scope.email);
             tempThing=$scope.email;
             console.log(infoStore.getUserEmail());
+            localStorage.setItem('user', $scope.email);
+            localStorage.setItem('isLoggedIn', 'Y');
             //Go to new page
             window.location = "homePage.html";
           }else{
@@ -34,10 +36,7 @@ app.controller('loginCtrl', function($scope, $http, infoStore) {
         });
     }
 
-});
-
-//Create Trainer
-app.controller('newTrainerCtrl', function($scope, $http, infoStore) {
+}).controller('newTrainerCtrl', function($scope, $http, infoStore) {
 
       $scope.createTrainer = function(){
         dat = {
@@ -58,12 +57,11 @@ app.controller('newTrainerCtrl', function($scope, $http, infoStore) {
           });
     }
 
-});
-
-//Create Trainer
-app.controller('homePage', function($scope, $http, infoStore) {
-    console.log(infoStore.getUserEmail());
-    console.log(tempThing);
-    $scope.playerEmail = infoStore.getUserEmail();
-
+}).controller('homePage', function($scope, $http, infoStore) {
+  if(localStorage.getItem('isLoggedIn') == 'Y'){
+    $scope.playerEmail = localStorage.getItem('user');
+    console.log(localStorage.getItem('user'));
+  }else{
+    window.location = "login.html";
+  }
 });
