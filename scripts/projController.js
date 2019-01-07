@@ -1,20 +1,6 @@
 var app = angular.module('osmirApp', []);
-var tempThing = '';
-app.factory('infoStore', function() {
-  var userEmail = {
-      Value: ''
-  };
 
-  return {
-    setUserEmail: function(newObj) {
-        userEmail.Value = newObj;
-    },
-    getUserEmail: function(){
-        return userEmail.Value;}
-  };
-
-}).controller('loginCtrl', function($scope, $http, infoStore) {
-    localStorage.setItem('isLoggedIn','N');
+app.controller('loginCtrl', function($scope, $http) {
     $scope.login = function(){
       dat = {
         'email' : $scope.email,
@@ -23,11 +9,8 @@ app.factory('infoStore', function() {
        $http.post('verifyLogin.php', dat)
           .then(function(response) {
           if(response.data != 'N'){
-            infoStore.setUserEmail($scope.email);
-            tempThing=$scope.email;
-            console.log(infoStore.getUserEmail());
-            localStorage.setItem('user', $scope.email);
-            localStorage.setItem('isLoggedIn', 'Y');
+            localStorage.setItem('user', $scope.email);//Set which user
+            localStorage.setItem('isLoggedIn', 'Y');//Allow access to homepage
             //Go to new page
             window.location = "homePage.html";
           }else{
@@ -36,20 +19,21 @@ app.factory('infoStore', function() {
         });
     }
 
-}).controller('newTrainerCtrl', function($scope, $http, infoStore) {
+});
 
+app.controller('newTrainerCtrl', function($scope, $http) {
       $scope.createTrainer = function(){
         dat = {
           'email' : $scope.email,
           'name' : $scope.name,
-          'sport' : $scope.sport,
           'admin' : $scope.admin,
           'password' : $scope.password
         };
          $http.post('newTrainer.php', dat)
             .then(function(response) {
             if(response.data == 'Y'){
-              infoStore.setUserEmail($scope.email);
+              localStorage.setItem('user', $scope.email); //Set which user
+              localStorage.setItem('isLoggedIn', 'Y'); //Allow access to homepage
               window.location = "homePage.html";
             }else{
               window.alert("Account Already Associated With Email")
@@ -57,11 +41,41 @@ app.factory('infoStore', function() {
           });
     }
 
-}).controller('homePage', function($scope, $http, infoStore) {
+});
+
+app.controller('newAthlete', function($scope, $http) {
+  if(localStorage.getItem('isLoggedIn') == 'Y'){
+    $scope.createAthlete = function(){
+      dat = {
+        'email' : $scope.email,
+        'name' : $scope.name,
+        'password' : $scope.password,
+        'allergies' : $scope.allergies,
+        'conditions' : $scope.conditions,
+        'status' : 'Cleared'
+      };
+      $http.post('newAthlete.php', dat)
+         .then(function(response) {
+         if(response.data == 'Y'){
+           window.location = "homePage.html";
+         }else{
+           window.alert("Account Already Associated With Email")
+         }
+       });
+   }
+  }else{ //If someone just wandered to the page
+    window.location = "login.html";
+  }
+});
+
+app.controller('homePage', function($scope, $http) {
   if(localStorage.getItem('isLoggedIn') == 'Y'){
     $scope.playerEmail = localStorage.getItem('user');
     console.log(localStorage.getItem('user'));
-  }else{
+  }else{ //If someone just wandered to the page
     window.location = "login.html";
+  }
+  $scope.newAthlete = function(){
+      window.location = "newAthlete.html";
   }
 });

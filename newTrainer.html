@@ -21,7 +21,6 @@
           Confirm Password: <input type="password" name="cpassword" ng-model="cpassword" required>
           <!-- make sure passwords match -->
           <span ng-show="password != cpassword"  style="color:red">Your passwords must match.</span><br>
-          Sport: <input type="text" name="sport" ng-model="sport" required><br>
           <!-- make sure all fields are filled out -->
           Admin <input type="checkbox" ng-model="admin" ng-true-value="1" ng-false-value="0"><br>
           <span ng-show="myform.myfield.$error.required">All fields must be filled out</span>

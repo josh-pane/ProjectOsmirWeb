@@ -8,11 +8,9 @@ $request = json_decode($postdata);
 $email = $request->email;
 $name = $request->name;
 $pass = $request->password;
-if($request->admin == '1'){
-  $admin = 1;
-}else {
-  $admin = 0;
-}
+$allergies = $request->allergies;
+$conditions = $request->conditions;
+$status = $request->status;
 
 
 $conn = new mysqli("vent.cw5pxbba6uve.us-west-2.rds.amazonaws.com", "ventadmin", "Hambone1joshpane42", "OSMIR");
@@ -24,8 +22,8 @@ $hashpass = password_hash($pass, PASSWORD_DEFAULT);
 
 
 
-$sql = "INSERT INTO trainer (trainerEmail, password_ID, admin, trainerName)
-VALUES ('$email', '$hashpass', $admin, '$name')";
+$sql = "INSERT INTO player (playerEmail, password_ID, playerStatus, playerName, allergies, conditions)
+VALUES ('$email', '$hashpass', '$status', '$name', '$allergies', '$conditions')";
 if ($conn->query($sql) == TRUE) {
     echo(json_encode("Y"));
 } else {

@@ -1,0 +1,91 @@
+
+<!doctype html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+<script src="scripts/projController.js"></script>
+
+  <head>
+    <link rel="shortcut icon" href="">
+    <meta charset="utf-8">
+    <title>OSMIR</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  </head>
+  <body>
+      <div ng-app="osmirApp" ng-controller="newAthlete">
+        Name: <input type="text" name="name" ng-model="name" required><br>
+        Email: <input type="text" name="email" ng-model="email" required><br>
+        Password: <input type="password" name="password" ng-model="password" required><br>
+        Confirm Password: <input type="password" name="cpassword" ng-model="cpassword" required>
+        <!-- make sure passwords match -->
+        <span ng-show="password != cpassword"  style="color:red">Your passwords must match.</span><br>
+        <!-- make sure all fields are filled out -->
+        <span ng-show="myform.myfield.$error.required">All fields must be filled out</span>
+
+        <br>
+          <table style="width:75%">
+            <tr>
+              <td><input type="checkbox" ng-model="Baseball"> Baseball</td>
+              <td><input type="checkbox" ng-model="MBasketball"> Men's Basketball</td>
+              <td><input type="checkbox" ng-model="WBasketball"> Women's Basketball</td>
+              <td><input type="checkbox" ng-model="Bowling"> Bowling</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" ng-model="MCrossCountry"> Men's Cross Country </td>
+              <td><input type="checkbox" ng-model="WCrossCountry"> Women's Cross Country </td>
+              <td><input type="checkbox" ng-model="FieldHockey"> Field Hockey </td>
+              <td><input type="checkbox" ng-model="Football"> Football</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" ng-model="MGolf"> Men's Golf </td>
+              <td><input type="checkbox" ng-model="WGolf"> Women's Golf </td>
+              <td><input type="checkbox" ng-model="MIceHockey"> Men's Ice Hockey </td>
+              <td><input type="checkbox" ng-model="WIceHockey"> Women's Ice Hockey </td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" ng-model="MLacrosse"> Men's Lacrosse </td>
+              <td><input type="checkbox" ng-model="WLacrosse"> Women's Lacrosse </td>
+              <td><input type="checkbox" ng-model="Rowing"> Rowing </td>
+              <td><input type="checkbox" ng-model="Softball"> Softball</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" ng-model="MSoccer"> Men's Soccer </td>
+              <td><input type="checkbox" ng-model="WSoccer"> Women's Soccer </td>
+              <td><input type="checkbox" ng-model="MSwimming"> Men's Swimming </td>
+              <td><input type="checkbox" ng-model="WSwimming"> Women's Swimming </td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" ng-model="MTennis"> Men's Tennis </td>
+              <td><input type="checkbox" ng-model="WTennis"> Women's Tennis </td>
+              <td><input type="checkbox" ng-model="MTrackField"> Men's Track&Field </td>
+              <td><input type="checkbox" ng-model="WTrackField"> Women's Track&Field </td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" ng-model="MVolleyball"> Men's Volleyball </td>
+              <td><input type="checkbox" ng-model="WVolleyball"> Women's Volleyball </td>
+              <td><input type="checkbox" ng-model="MWaterPolo"> Men's Water Polo </td>
+              <td><input type="checkbox" ng-model="WWaterPolo"> Women's Water Polo </td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" ng-model="Wrestling"> Wrestling </td>
+              <td><input type="checkbox" ng-model="Other"> Other </td>
+            </tr>
+          </table>
+        <br>
+        <br>
+
+        Allergies <br>
+        <textarea rows="4" cols="40" ng-model="allergies">None</textarea>
+        <br>
+
+        Medical Conditions <br>
+        <textarea rows="4" cols="40" ng-model="conditions">None</textarea>
+        <br>
+        <button ng-click="createAthlete()" ng-disabled="inputField.$invalid">Create</button>
+        <button onclick="location.href='homePAge.html';">Back</button>
+      </div>
+</body>
+
+</html>

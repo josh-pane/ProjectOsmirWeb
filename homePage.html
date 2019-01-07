@@ -1,8 +1,3 @@
-<!-- if (password_verify('rasmuslerdorf', $hash)) {
-    echo 'Password is valid!';
-} else {
-    echo 'Invalid password.';
-} -->
 
 <!doctype html>
 <html>
@@ -20,10 +15,9 @@
   </head>
   <body>
       <div ng-app="osmirApp" ng-controller="homePage">
-          Welcome
-          {{ playerEmail }}
+          Welcome {{ playerEmail }}<br>
+      <button ng-click="newAthlete()">New Athlete</button>
       </div>
-
 </body>
 
 </html>
