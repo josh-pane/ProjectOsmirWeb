@@ -159,7 +159,20 @@ app.controller('newAthlete', function($scope, $http) {
                    $http.post('playerToSports.php', sportStuff)
                       .then(function(response) {
                       if(response.data == 'Y'){
-                        window.location = "homePage.html";
+
+                        ecDat = {
+                          'email' : $scope.email,
+                          'name' : $scope.ecName,
+                          'num' : $scope.ecNumber
+                        };
+                        $http.post('newEC.php', ecDat)
+                           .then(function(response) {
+                           if(response.data == 'Y'){
+                             window.location = "homePage.html";;
+                           }else{
+                             window.alert(response.data);
+                           }
+                         });
                       }else{
                         window.alert(response.data);
                       }
@@ -178,11 +191,28 @@ app.controller('newAthlete', function($scope, $http) {
 
 app.controller('homePage', function($scope, $http) {
   if(localStorage.getItem('isLoggedIn') == 'Y'){
-    $scope.playerEmail = localStorage.getItem('user');
-    console.log(localStorage.getItem('user'));
+    $http.post('showSports.php')
+       .then(function(response) {
+         $scope.allSports = response.data;})
+         .catch(function (err) {window.alert("Error Loading Page");});
+
+
   }else{ //If someone just wandered to the page
     window.location = "login.html";
   }
+
+  //New Athlete Button Pressed
+  $scope.changeValue = function($item){
+    dat = {
+      'sport' : $item.sport
+    };
+    $http.post('showPlayers.php', dat)
+       .then(function(response) {
+         $scope.players = response.data;})
+         .catch(function (err) {window.alert("Error Loading Page");});
+  }
+
+  //New Athlete Button Pressed
   $scope.newAthlete = function(){
       window.location = "newAthlete.html";
   }

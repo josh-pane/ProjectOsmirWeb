@@ -15,14 +15,14 @@
   </head>
   <body>
       <div ng-app="osmirApp" ng-controller="newAthlete">
+        <form name="inputField">
         Name: <input type="text" name="name" ng-model="name" required><br>
         Email: <input type="text" name="email" ng-model="email" required><br>
         Password: <input type="password" name="password" ng-model="password" required><br>
         Confirm Password: <input type="password" name="cpassword" ng-model="cpassword" required>
         <!-- make sure passwords match -->
         <span ng-show="password != cpassword"  style="color:red">Your passwords must match.</span><br>
-        <!-- make sure all fields are filled out -->
-        <span ng-show="myform.myfield.$error.required">All fields must be filled out</span>
+
 
         <br>
           <table style="width:75%">
@@ -77,14 +77,21 @@
         <br>
 
         Allergies <br>
-        <textarea rows="4" cols="40" ng-model="allergies">None</textarea>
+        <textarea rows="4" cols="40" ng-model="allergies"></textarea>
         <br>
 
         Medical Conditions <br>
-        <textarea rows="4" cols="40" ng-model="conditions">None</textarea>
+        <textarea rows="4" cols="40" ng-model="conditions"></textarea>
         <br>
+        <br>
+
+        Emergency Contact Name: <input type="text" name="name" ng-model="ecName" required><br>
+        Emergency Contact Phone Number: <input type="text" name="name" ng-model="ecNumber" required><br>
+        <!-- make sure all fields are filled out -->
+        <span ng-show="myform.myfield.$error.required">All fields must be filled out</span>
         <button ng-click="createAthlete()" ng-disabled="inputField.$invalid">Create</button>
-        <button onclick="location.href='homePAge.html';">Back</button>
+        <button onclick="location.href='homePage.html';">Back</button>
+      </form>
       </div>
 </body>
 

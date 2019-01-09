@@ -15,7 +15,18 @@
   </head>
   <body>
       <div ng-app="osmirApp" ng-controller="homePage">
-          Welcome {{ playerEmail }}<br>
+        <select ng-model="list" ng-change="changeValue(list)" ng-options="x.sport for x in allSports">
+        </select>
+        <br>
+        <br>
+        <table>
+          <tr ng-repeat="player in players track by $index">
+            <td>Name: {{player.playerName}}</td>
+            <td>Status: {{player.playerStatus}}</td>
+            <td>Email: {{player.playerEmail}}</td>
+          </tr>
+        </table>
+        <br>
       <button ng-click="newAthlete()">New Athlete</button>
       </div>
 </body>
