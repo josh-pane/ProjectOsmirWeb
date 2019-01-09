@@ -6,6 +6,7 @@ app.controller('loginCtrl', function($scope, $http) {
         'email' : $scope.email,
         'password' : $scope.password
       };
+      //Send data to php page
        $http.post('verifyLogin.php', dat)
           .then(function(response) {
           if(response.data != 'N'){
@@ -29,6 +30,7 @@ app.controller('newTrainerCtrl', function($scope, $http) {
           'admin' : $scope.admin,
           'password' : $scope.password
         };
+        //Send data to PHP page
          $http.post('newTrainer.php', dat)
             .then(function(response) {
             if(response.data == 'Y'){
@@ -189,31 +191,62 @@ app.controller('newAthlete', function($scope, $http) {
 
 });
 
+
+
 app.controller('homePage', function($scope, $http) {
+  localStorage.setItem('player', '');
   if(localStorage.getItem('isLoggedIn') == 'Y'){
+
+    //Get List of sports
     $http.post('showSports.php')
        .then(function(response) {
          $scope.allSports = response.data;})
          .catch(function (err) {window.alert("Error Loading Page");});
 
+    //New Athlete Button Pressed
+    $scope.changeValue = function($item){
+      dat = {
+        'sport' : $item.sport
+      };
+
+    //Get list of players in sport
+    $http.post('showPlayers.php', dat)
+       .then(function(response) {
+         $scope.players = response.data;})
+       .catch(function (err) {
+         window.alert("Error Loading Page");});
+    }
+
+    //New Athlete Button Pressed
+    $scope.newAthlete = function(){
+        window.location = "newAthlete.html";
+    }
+
+    //Clicked on Player
+    $scope.playerInjury = function($item){
+      localStorage.setItem('player', $item);
+      window.location = "playerReport.html";
+    }
+
 
   }else{ //If someone just wandered to the page
     window.location = "login.html";
   }
-
-  //New Athlete Button Pressed
-  $scope.changeValue = function($item){
-    dat = {
-      'sport' : $item.sport
-    };
-    $http.post('showPlayers.php', dat)
-       .then(function(response) {
-         $scope.players = response.data;})
-         .catch(function (err) {window.alert("Error Loading Page");});
-  }
-
-  //New Athlete Button Pressed
-  $scope.newAthlete = function(){
-      window.location = "newAthlete.html";
-  }
 });
+
+// app.controller('playerReports', function($scope, $http) {
+//
+//   //Check if Logged In
+//   if(localStorage.getItem('isLoggedIn') == 'Y'){
+//     var player = localStorage.getItem('player');
+//     //Get list of players in sport
+//     $http.post('showPlayers.php', dat)
+//        .then(function(response) {
+//          $scope.players = response.data;})
+//        .catch(function (err) {
+//          window.alert("Error Loading Page");});
+//     }
+//   }else{
+//     window.location = "login.html"
+//   }
+// });
